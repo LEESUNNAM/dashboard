@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import DashboardPage from './pages/dashboard-page';
+import FileSharePage from './pages/file-share-page';
 
 function App() {
   return (
@@ -9,13 +9,11 @@ function App() {
         width: '100%',
         minHeight: '100vh',
         bgcolor: 'background.default',
-        display: 'flex',
-        justifyContent: 'center',
         py: { xs: 2, md: 4 },
       }}
     >
-      <Container maxWidth="lg" sx={{ px: { xs: 2, md: 3 } }}>
-        <DashboardPage />
+      <Container maxWidth="xl" sx={{ px: { xs: 2, md: 3 } }}>
+        <FileSharePage />
       </Container>
     </Box>
   );
