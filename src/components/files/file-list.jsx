@@ -15,11 +15,12 @@ import EmptyState from '../common/empty-state';
  * @param {string}   category     - 현재 카테고리 (EmptyState 전달용) [Optional]
  * @param {string}   search       - 현재 검색어 (EmptyState 전달용) [Optional]
  * @param {function} onUploadClick - Empty State 업로드 버튼 핸들러 [Optional]
+ * @param {function} onDeleted    - 파일 삭제 후 목록 갱신 콜백 [Required]
  *
  * Example usage:
- * <FileList files={files} isLoading={loading} />
+ * <FileList files={files} isLoading={loading} onDeleted={refetch} />
  */
-function FileList({ files, isLoading, error, category, search, onUploadClick }) {
+function FileList({ files, isLoading, error, category, search, onUploadClick, onDeleted }) {
   if (isLoading) {
     return (
       <Box sx={{ display: 'flex', justifyContent: 'center', py: 10 }}>
@@ -48,7 +49,7 @@ function FileList({ files, isLoading, error, category, search, onUploadClick }) 
     <Grid container spacing={{ xs: 1.5, md: 2 }}>
       {files.map((file) => (
         <Grid key={file.id} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-          <FileCard file={file} />
+          <FileCard file={file} onDeleted={onDeleted} />
         </Grid>
       ))}
     </Grid>

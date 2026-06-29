@@ -61,6 +61,7 @@ function FileSharePage() {
         category={category}
         search={search}
         onUploadClick={scrollToUpload}
+        onDeleted={refetch}
       />
     </Box>
   );
