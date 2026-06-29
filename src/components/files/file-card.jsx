@@ -11,7 +11,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutlined';
 import DownloadIcon from '@mui/icons-material/Download';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
