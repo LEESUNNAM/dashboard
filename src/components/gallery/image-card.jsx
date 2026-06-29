@@ -56,7 +56,18 @@ function ImageCard({ image, currentUserId, onDeleted }) {
   };
 
   return (
-    <Card sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+    <Card
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
+        transition: 'transform 0.18s ease, box-shadow 0.18s ease',
+        '&:hover': {
+          transform: 'translateY(-3px)',
+          boxShadow: '0 6px 20px rgba(83,117,151,0.18)',
+        },
+      }}
+    >
       <CardMedia
         component="img"
         src={publicUrlData.publicUrl}
@@ -67,7 +78,8 @@ function ImageCard({ image, currentUserId, onDeleted }) {
         <Typography
           sx={{
             fontSize: '0.85rem',
-            fontWeight: 500,
+            fontWeight: 600,
+            color: 'var(--color-text-primary)',
             overflow: 'hidden',
             textOverflow: 'ellipsis',
             whiteSpace: 'nowrap',
@@ -75,19 +87,43 @@ function ImageCard({ image, currentUserId, onDeleted }) {
         >
           {image.file_name}
         </Typography>
-        <Typography sx={{ fontSize: '0.75rem', color: 'text.secondary' }}>
+        <Typography
+          sx={{
+            fontSize: '0.75rem',
+            color: 'var(--color-text-muted)',
+            mt: 0.3,
+          }}
+        >
           {formatBytes(image.size_bytes)}
         </Typography>
       </Box>
-      <CardActions sx={{ justifyContent: 'flex-end', pt: 0 }}>
+      <CardActions
+        sx={{
+          justifyContent: 'flex-end',
+          pt: 0,
+          borderTop: '1px solid',
+          borderColor: 'rgba(118,167,216,0.15)',
+        }}
+      >
         <Tooltip title="다운로드">
-          <IconButton aria-label="다운로드" onClick={handleDownload} size="small">
+          <IconButton
+            aria-label="다운로드"
+            onClick={handleDownload}
+            size="small"
+            sx={{ color: 'var(--color-primary-dark)', '&:hover': { color: 'var(--color-primary)' } }}
+          >
             <DownloadIcon fontSize="small" />
           </IconButton>
         </Tooltip>
         {isOwner && (
           <Tooltip title="삭제">
-            <IconButton aria-label="삭제" onClick={handleDelete} disabled={isDeleting} size="small">
+            <IconButton
+              aria-label="삭제"
+              onClick={handleDelete}
+              disabled={isDeleting}
+              size="small"
+              sx={{ color: 'var(--color-text-muted)', '&:hover': { color: 'error.main' } }}
+            >
               <DeleteIcon fontSize="small" />
             </IconButton>
           </Tooltip>

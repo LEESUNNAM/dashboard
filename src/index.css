@@ -1,21 +1,63 @@
+/* === D'etre 컬러 팔레트 + DASHLEE 디자인 시스템 === */
+:root {
+  --color-primary: #76A7D8;
+  --color-primary-light: #9FC1E4;
+  --color-primary-dark: #537597;
+  --color-secondary: #C5BDD8;
+  --color-accent: #818264;
+  --color-bg-primary: #F4F8FC;
+  --color-bg-secondary: #F9F8FB;
+  --color-text-primary: #47453C;
+  --color-text-secondary: #42484C;
+  --color-text-muted: #AAADAE;
+  --color-button-primary: #818264;
+  --color-button-hover: #4D4E30;
+  --color-link: #6189B1;
+  --color-link-hover: #4D6D8C;
+
+  /* DASHLEE 캡슐 */
+  --capsule-aspect-ratio: 0.742;
+  --motion-duration: 2.23s;
+}
+
 /* CSS 초기화 */
 * {
   box-sizing: border-box;
 }
 
-/* HTML, Body 초기화 */
 html,
 body {
   margin: 0;
   padding: 0;
   width: 100%;
   min-height: 100vh;
+  background-color: var(--color-bg-primary);
 }
 
-/* Root 앱 컨테이너 설정 */
 #root {
   width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+/* DASHLEE 캡슐 줌인 애니메이션 — 2.23s 단방향 줌인 후 즉시 컷백 */
+@keyframes capsule-zoom {
+  0%   { transform: scale(1); }
+  88%  { transform: scale(1.22); }
+  89%  { transform: scale(1); }
+  100% { transform: scale(1); }
+}
+
+/* 캡슐 내부 빛 이동 */
+@keyframes capsule-glint {
+  0%   { opacity: 0.5; transform: translate(-30%, -30%) scale(1); }
+  50%  { opacity: 0.9; transform: translate(-20%, -20%) scale(1.1); }
+  100% { opacity: 0.5; transform: translate(-30%, -30%) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .capsule-animate {
+    animation: none !important;
+  }
 }

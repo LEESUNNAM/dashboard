@@ -62,11 +62,16 @@ function UploadDropzone({ userId, onUploaded }) {
     <Box
       sx={{
         border: '2px dashed',
-        borderColor: 'divider',
+        borderColor: 'rgba(118,167,216,0.5)',
         borderRadius: 2,
         p: { xs: 3, md: 4 },
         textAlign: 'center',
         mb: { xs: 3, md: 4 },
+        bgcolor: 'background.paper',
+        transition: 'border-color 0.2s',
+        '&:hover': {
+          borderColor: 'var(--color-primary)',
+        },
       }}
     >
       <input
@@ -79,13 +84,30 @@ function UploadDropzone({ userId, onUploaded }) {
       />
       <Button
         variant="contained"
+        color="primary"
         startIcon={isUploading ? <CircularProgress size={18} color="inherit" /> : <UploadFileIcon />}
         disabled={isUploading}
         onClick={() => inputRef.current?.click()}
+        sx={{
+          px: 3,
+          py: 1,
+          fontWeight: 600,
+          letterSpacing: '0.03em',
+          boxShadow: '0 2px 8px rgba(129,130,100,0.25)',
+          '&:hover': {
+            boxShadow: '0 4px 14px rgba(77,78,48,0.30)',
+          },
+        }}
       >
         {isUploading ? '업로드 중...' : '이미지 업로드'}
       </Button>
-      <Typography sx={{ color: 'text.secondary', fontSize: '0.85rem', mt: 1.5 }}>
+      <Typography
+        sx={{
+          color: 'var(--color-text-muted)',
+          fontSize: '0.85rem',
+          mt: 1.5,
+        }}
+      >
         이미지 파일(최대 10MB)을 여러 개 선택할 수 있습니다.
       </Typography>
       {errorMessage && (

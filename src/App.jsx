@@ -8,6 +8,7 @@ function App() {
       sx={{
         width: '100%',
         minHeight: '100vh',
+        bgcolor: 'background.default',
         display: 'flex',
         justifyContent: 'center',
         py: { xs: 2, md: 4 },
