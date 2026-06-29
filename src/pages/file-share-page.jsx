@@ -16,10 +16,14 @@ import { useUploadFiles } from '../hooks/use-upload-files';
  * 파일 공유 웹사이트 메인 페이지.
  * Header → UploadArea → CategoryTabs + SearchSortBar → FileList 순으로 구성된다.
  *
+ * Props:
+ * @param {object}   user      - Supabase 인증 유저 객체 [Required]
+ * @param {function} onSignOut - 로그아웃 핸들러 [Required]
+ *
  * Example usage:
- * <FileSharePage />
+ * <FileSharePage user={user} onSignOut={signOut} />
  */
-function FileSharePage() {
+function FileSharePage({ user, onSignOut }) {
   const [category, setCategory] = useState('all');
   const [search,   setSearch]   = useState('');
   const [sort,     setSort]     = useState('newest');
@@ -34,7 +38,7 @@ function FileSharePage() {
 
   return (
     <Box>
-      <Header onUploadClick={scrollToUpload} />
+      <Header onUploadClick={scrollToUpload} user={user} onSignOut={onSignOut} />
 
       <Box ref={uploadRef}>
         <UploadArea onUpload={uploadFiles} isUploading={isUploading} items={items} />

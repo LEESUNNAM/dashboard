@@ -1,7 +1,9 @@
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import FolderZipOutlinedIcon from '@mui/icons-material/FolderZipOutlined';
+import LogoutIcon from '@mui/icons-material/Logout';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 
 /**
@@ -9,11 +11,13 @@ import UploadFileIcon from '@mui/icons-material/UploadFile';
  *
  * Props:
  * @param {function} onUploadClick - 업로드 영역으로 스크롤 이동 [Required]
+ * @param {object}   user          - Supabase 인증 유저 객체 [Required]
+ * @param {function} onSignOut     - 로그아웃 핸들러 [Required]
  *
  * Example usage:
- * <Header onUploadClick={scrollToUpload} />
+ * <Header onUploadClick={scrollToUpload} user={user} onSignOut={signOut} />
  */
-function Header({ onUploadClick }) {
+function Header({ onUploadClick, user, onSignOut }) {
   return (
     <Box
       sx={{
@@ -35,6 +39,7 @@ function Header({ onUploadClick }) {
       <Box aria-hidden="true" sx={{ position: 'absolute', top: -50, right: -50, width: 200, height: 200, borderRadius: '50%', background: 'rgba(255,255,255,0.10)', pointerEvents: 'none' }} />
       <Box aria-hidden="true" sx={{ position: 'absolute', bottom: -40, left: '40%', width: 140, height: 140, borderRadius: '50%', background: 'rgba(255,255,255,0.07)', pointerEvents: 'none' }} />
 
+      {/* 브랜드 */}
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, position: 'relative' }}>
         <Box
           sx={{
@@ -64,25 +69,81 @@ function Header({ onUploadClick }) {
         </Box>
       </Box>
 
-      <Button
-        variant="contained"
-        startIcon={<UploadFileIcon />}
-        onClick={onUploadClick}
+      {/* 우측 액션 영역 */}
+      <Box
         sx={{
-          bgcolor: '#818264',
-          color: 'white',
-          fontWeight: 600,
-          px: 3,
-          py: 1.2,
-          borderRadius: 2,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: { xs: 'flex-start', sm: 'flex-end' },
+          gap: 1,
           flexShrink: 0,
-          whiteSpace: 'nowrap',
-          boxShadow: '0 2px 8px rgba(0,0,0,0.18)',
-          '&:hover': { bgcolor: '#4D4E30' },
+          position: 'relative',
         }}
       >
-        파일 업로드
-      </Button>
+        {/* 로그인 유저 이메일 */}
+        {user?.email && (
+          <Typography
+            sx={{
+              fontSize: '0.78rem',
+              color: 'rgba(255,255,255,0.82)',
+              maxWidth: 200,
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            {user.email}
+          </Typography>
+        )}
+
+        {/* 버튼 영역 */}
+        <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+          {/* 로그아웃 */}
+          <Tooltip title="로그아웃">
+            <Button
+              variant="outlined"
+              startIcon={<LogoutIcon />}
+              onClick={onSignOut}
+              size="small"
+              sx={{
+                borderColor: 'rgba(255,255,255,0.6)',
+                color: 'white',
+                fontWeight: 500,
+                px: 1.5,
+                py: 0.8,
+                borderRadius: 2,
+                whiteSpace: 'nowrap',
+                '&:hover': {
+                  borderColor: 'white',
+                  bgcolor: 'rgba(255,255,255,0.15)',
+                },
+              }}
+            >
+              로그아웃
+            </Button>
+          </Tooltip>
+
+          {/* 파일 업로드 */}
+          <Button
+            variant="contained"
+            startIcon={<UploadFileIcon />}
+            onClick={onUploadClick}
+            sx={{
+              bgcolor: '#818264',
+              color: 'white',
+              fontWeight: 600,
+              px: 3,
+              py: 1.2,
+              borderRadius: 2,
+              whiteSpace: 'nowrap',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.18)',
+              '&:hover': { bgcolor: '#4D4E30' },
+            }}
+          >
+            파일 업로드
+          </Button>
+        </Box>
+      </Box>
     </Box>
   );
 }
